@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { LoginpageComponent } from './loginpage/loginpage.component';
+import { LoginComponent } from './loginpage/loginpage.component';
 import { SignUppageComponent } from './sign-uppage/sign-uppage.component';
 
 import { FormsModule } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { AuthService } from './auth.service';
 import { ProfileComponent } from './profile/profile.component';
@@ -27,7 +28,7 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     HomepageComponent,
-    LoginpageComponent,
+    LoginComponent,
     SignUppageComponent,
     ProfileComponent,
     EmailComponent,
