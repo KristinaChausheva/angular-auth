@@ -6,17 +6,35 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
 import { SignUppageComponent } from './sign-uppage/sign-uppage.component';
 
+import { FormsModule } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { AuthService } from './auth.service';
+
+const firebaseConfig = {
+  apiKey: 'your_keyhere_jwaeqsFdm1hNMQ',
+  authDomain: 'yourdomain.firebaseapp.com',
+  databaseURL: 'https://angularauth-yourlinkhere.firebaseio.com',
+  projectId: 'angularauth-yourIDHere',
+  storageBucket: 'angularauth-Idhere.appspot.com',
+  messagingSenderId: '11240551_IDhere',
+};
+
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     LoginpageComponent,
-    SignUppageComponent
+    SignUppageComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
