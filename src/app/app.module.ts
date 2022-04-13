@@ -8,6 +8,7 @@ import { SignUppageComponent } from './sign-uppage/sign-uppage.component';
 
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 
@@ -19,7 +20,6 @@ import { EmailComponent } from './email/email.component';
   declarations: [
     AppComponent,
     HomepageComponent,
-    LoginComponent,
     SignUppageComponent,
     ProfileComponent,
     EmailComponent,

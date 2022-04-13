@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs';
+// import 'rxjs/add/operator/switchMap';
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+// export const auth = getAuth();
 
 @Injectable()
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(private router: Router) {}
+  auth = getAuth();
 
-  login(email: string, password: string) {
-    this.afAuth.auth
-      .signInWithEmailAndPassword(email, password)
+  login(auth, email: string, password: string) {
+    signInWithEmailAndPassword(auth, email, password)
       .then((value) => {
         console.log('Nice, it worked!');
         this.router.navigateByUrl('/profile');
@@ -21,9 +29,8 @@ export class AuthService {
       });
   }
 
-  emailSignup(email: string, password: string) {
-    this.afAuth.auth
-      .createUserWithEmailAndPassword(email, password)
+  register(auth, email: string, password: string) {
+    createUserWithEmailAndPassword(auth, email, password)
       .then((value) => {
         console.log('Sucess', value);
         this.router.navigateByUrl('/profile');
@@ -33,24 +40,9 @@ export class AuthService {
       });
   }
 
-  googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider)
-      .then((value) => {
-        console.log('Sucess', value), this.router.navigateByUrl('/profile');
-      })
-      .catch((error) => {
-        console.log('Something went wrong: ', error);
-      });
-  }
-
   logout() {
-    this.afAuth.auth.signOut().then(() => {
+    signOut(auth).then(() => {
       this.router.navigate(['/']);
     });
-  }
-
-  private oAuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider);
   }
 }
